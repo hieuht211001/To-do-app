@@ -1,0 +1,371 @@
+/* Import Google Font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* main body set up */
+body{
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url('normal mode.jpg');
+  background-size: cover;
+}
+
+::selection{
+  color: #fff;
+  background: #3C87FF;
+}
+.wrapper{
+  max-width: 405px;
+  padding: 28px 0 30px;
+  margin: 137px auto;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* set up title to-do tasks */
+.title{
+  text-align: center;
+  font-size: xx-large;
+  font-weight: bold;
+  color: #0059ff;
+  padding: 0 20px 5px 25px;
+  display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 20px;
+	transition: background 0.2s linear;
+}
+
+/* set up input area*/
+.task-input{
+  display: flex;
+  height: 52px;
+  padding: 0 25px;
+  position: relative;
+}
+
+/* set up add button*/
+.add-btn{
+  border: none;
+  opacity: 0.9;
+  outline: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 7px 13px;
+  border-radius: 4px;
+  letter-spacing: 0.3px;
+  transition: transform 0.25s ease;
+  background: linear-gradient(135deg, #1798fb 0%, #2D5CFE 100%);
+}
+
+/* set up input bar*/
+.task-input input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 18px;
+  border-radius: 5px;
+  padding: 0 25px 0 15px;
+  border: 1px solid #999;
+}
+.task-input input:focus,
+/* set up input bar when active -> border: blue*/
+.task-input input.active{
+  padding-left: 17px;
+  border: 2px solid #3C87FF;
+}
+.task-input input::placeholder{
+  color: #bfbfbf;
+}
+
+/* set up control area*/
+.controls, li{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.controls{
+  padding: 18px 25px;
+  border-bottom: 1px solid #ccc;
+}
+
+/* set up filter area*/
+.filters span{
+  margin: 0 8px;
+  font-size: 17px;
+  color: #444444;
+  cursor: pointer;
+}
+.filters span:first-child{
+  margin-left: 0;
+}
+
+/* set up filter bar when change status of task*/
+.filters span.active{
+  color: #3C87FF;
+}
+
+/* set up delete all button */
+.controls .clear-btn{
+  border: none;
+  opacity: 0.6; /* button is blur and locked when there is no task*/
+  outline: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 7px 13px;
+  border-radius: 4px;
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  transition: transform 0.25s ease;
+  background: linear-gradient(135deg, #1798fb 0%, #2D5CFE 100%);
+}
+
+/* button is on and brighter when we have more than 1 task*/
+.clear-btn.active{
+  opacity: 0.9;
+  pointer-events: auto;
+}
+
+/* button is bigger  when click */
+.clear-btn:active{
+  transform: scale(0.93);
+}
+
+/* set up task box area*/
+.task-box{
+  text-align: center;
+  margin-top: 20px;
+  margin-right: 5px;
+  padding: 0 20px 0px 25px;
+}
+
+.task-box.overflow{
+  overflow-y: auto;
+  max-height: 300px;
+}
+.task-box::-webkit-scrollbar{
+  width: 5px;
+}
+.task-box::-webkit-scrollbar-track{
+  background: #f1f1f1;
+  border-radius: 25px;
+}
+.task-box::-webkit-scrollbar-thumb{
+  background: #e6e6e6;
+  border-radius: 25px;
+}
+.task-box .task{
+  list-style: none;
+  font-size: 17px;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  align-items: flex-start;
+  border-bottom: 1px solid #ccc;
+}
+.task-box .task:last-child{
+  margin-bottom: 0;
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.task-box .task label{
+  display: flex;
+  align-items: flex-start;
+}
+.task label input{
+  margin-top: 7px;
+  accent-color: #3C87FF;
+}
+.task label p{
+  user-select: none;
+  margin-left: 12px;
+  word-wrap: break-word;
+}
+
+/* set up when a task is checked*/
+.task label p.checked{
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+.task-box .settings{
+  position: relative;
+}
+.settings :where(i, li){
+  cursor: pointer;
+}
+.settings .task-menu{
+  z-index: 10;
+  right: -5px;
+  bottom: -65px;
+  padding: 5px 0;
+  background: #fff;
+  position: absolute;
+  border-radius: 4px;
+  transform: scale(0);
+  transform-origin: top right;
+  box-shadow: 0 0 6px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+.task-box .task:last-child .task-menu{
+  bottom: 0;
+  transform-origin: bottom right;
+}
+.task-box .task:first-child .task-menu{
+  bottom: -65px;
+  transform-origin: top right;
+}
+.task-menu.show{
+  transform: scale(1);
+}
+.task-menu li{
+  height: 25px;
+  font-size: 16px;
+  margin-bottom: 2px;
+  padding: 17px 15px;
+  cursor: pointer;
+  justify-content: flex-start;
+}
+.task-menu li:last-child{
+  margin-bottom: 0;
+}
+.settings li:hover{
+  background: #f5f5f5;
+}
+.settings li i{
+  padding-right: 8px;
+}
+
+/* set up footer area */
+.footer {
+  text-align: center;
+  margin-top: 20px;
+  margin-right: 5px;
+  padding: 0 20px 0px 25px;
+}
+
+/* set up date information */
+.datetime {
+  text-align: center;
+  margin-top: 7px;
+  margin-right: 5px;
+  padding: 0 20px 0px 25px;
+
+  font-weight: bold;
+}
+
+/* media set up*/
+@media (max-width: 400px) {
+  body{
+    padding: 0 10px;
+  }
+  .wrapper {
+    padding: 20px 0;
+  }
+  .filters span{
+    margin: 0 5px;
+  }
+  .task-input{
+    padding: 0 20px;
+  }
+  .controls{
+    padding: 18px 20px;
+  }
+  .task-box{
+    margin-top: 20px;
+    margin-right: 5px;
+    padding: 0 15px 10px 20px;
+  }
+  .task label input{
+    margin-top: 4px;
+  }
+}
+
+* {
+	box-sizing: border-box;
+}
+
+/* set up background change transistion*/
+.bgchange {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 20px;
+	transition: background 0.2s linear;
+}
+
+/* change background when change to dark mode*/
+body.dark {
+  background-image: url('dark\ mode.jpg');
+}
+
+/* change text, box color when change to dark mode*/
+.dark .wrapper {
+  background: #0a192e;
+}
+.dark .title{
+  color: #ffffff;
+}
+.dark .filters span{
+  color: #ffffff;
+}
+.dark .filters span.active{
+  color: #00a2ff;
+}
+.dark .task-box{
+  color: white;
+}
+.dark .footer{
+  color: white;
+}
+
+.dark .label{
+  background-color: white;
+}
+.dark .label .ball{
+  background-color: rgb(0, 47, 255);
+}
+.checkbox {
+	opacity: 0;
+	position: absolute;
+}
+
+/* toggle color*/
+.label {
+	background-color: rgb(0, 47, 255);
+	border-radius: 50px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 5px;
+	position: relative;
+	height: 18px;
+	width: 30px;
+	transform: scale(1.5);
+}
+/* toogle color*/
+.label .ball {
+	background-color: #fff;
+	border-radius: 50%;
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	height: 14px;
+	width: 14px;
+	transform: translateX(0px);
+	transition: transform 0.2s linear;
+}
+
+/* toggle transition when click*/
+.checkbox:checked + .label .ball {
+	transform: translateX(12px);
+}
+

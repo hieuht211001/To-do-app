@@ -39,10 +39,11 @@ MAIN FUNCTION OF TO-DO APP:
     - Edit task button (항목 클릭하여 수정 가능)
 
     - Delete task button (각 항목 오른쪽에서 삭제처리)
-    
+
     - Mark important task button
 
     - Show number of doing tasks (남은 TODO 숫자를 보여준다.)
+
     - Show information about today's date (click this to move to calendar page):
         + Show current time, date, month, year
         + Select month
@@ -51,9 +52,15 @@ MAIN FUNCTION OF TO-DO APP:
 
 
 추가구현:
+
     - Alert when content of input task is blank
+
     - Day-night mode toggle 
+
     - Mark important task button
+
     - Show information about today's date
+
     - Edit task button
+    
     - Calendar page (참고)
